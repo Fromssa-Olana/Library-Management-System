@@ -2,9 +2,9 @@ package com.librarymanagement.application.views.member;
 
 import java.util.Optional;
 
-import com.librarymanagement.application.data.entity.Address;
-import com.librarymanagement.application.data.entity.Member;
-import com.librarymanagement.application.data.service.MemberService;
+import com.librarymanagement.application.backend.entity.Address;
+import com.librarymanagement.application.backend.entity.Member;
+import com.librarymanagement.application.backend.service.MemberService;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.button.Button;
@@ -111,7 +111,7 @@ public class memberView extends Div {
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 Optional<Member> personFromBackend = memberService.get(event.getValue().getId());
-                // when a row is selected but the data is no longer available, refresh grid
+                // when a row is selected but the backend is no longer available, refresh grid
                 if (personFromBackend.isPresent()) {
                     populateForm(personFromBackend.get());
                 } else {

@@ -1,7 +1,7 @@
-package com.librarymanagement.application.data.service;
+package com.librarymanagement.application.backend.service;
 
-import com.librarymanagement.application.data.Repository.BookRepository;
-import com.librarymanagement.application.data.entity.Book;
+import com.librarymanagement.application.backend.Repository.BookRepository;
+import com.librarymanagement.application.backend.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,7 @@ public class BookService {
     /**
      *  It search a book object by its id
      * @param id
+     *          id of the object
      * @return
      */
     public Optional<Book> get(Integer id) {

@@ -1,7 +1,7 @@
 package com.librarymanagement.application.views.book;
 
-import com.librarymanagement.application.data.entity.Book;
-import com.librarymanagement.application.data.service.BookService;
+import com.librarymanagement.application.backend.entity.Book;
+import com.librarymanagement.application.backend.service.BookService;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.button.Button;
@@ -118,7 +118,7 @@ public class BookView extends Div {
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 Optional<Book> bookFromBackend = bookService.get(event.getValue().getId());
-                // when a row is selected but the data is no longer available, refresh grid
+                // when a row is selected but the backend is no longer available, refresh grid
                 if (bookFromBackend.isPresent()) {
                     populateForm(bookFromBackend.get());
                 } else {

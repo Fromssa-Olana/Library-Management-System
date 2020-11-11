@@ -1,19 +1,35 @@
-package com.librarymanagement.application.data.entity;
+package com.librarymanagement.application.backend.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "address")
 public class Address extends AbstractEntity {
+
+    @Column(name = "address")
     private String address;
 
+    @Column(name = "city")
     private String city;
 
+    @Column(name = "state")
     private String state;
 
+    @Column(name = "zip_code")
     private String zipCode;
 
-
+    // TODO I coud not able to Establish a relationship between member and address
+//    @OneToOne(mappedBy = "address_id")
+//    @Column(name = "member_id")
+//    private Member member;
+//
+//    public Member getMember() {
+//        return member;
+//    }
+//
+//    public void setMember(Member member) {
+//        this.member = member;
+//    }
 
     public String getAddress() {
         return address;
