@@ -132,12 +132,21 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+<<<<<<< HEAD
 
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+=======
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-parent</artifactId>
+            <version>6.4.4</version>
+        </dependency>
+
+>>>>>>> 9493bbcf543222cc8709ad8445726f74509c5995
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

@@ -1,10 +1,11 @@
-package com.librarymanagement.application.data.entity;
+package com.librarymanagement.application.backend.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table()
 public class Address extends AbstractEntity {
+
     private String address;
 
     private String city;
