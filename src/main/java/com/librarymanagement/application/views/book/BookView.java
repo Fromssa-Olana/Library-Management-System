@@ -17,7 +17,6 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.librarymanagement.application.views.main.MainView;
@@ -39,7 +38,6 @@ public class BookView extends Div {
     // Buttons
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
-    private TextField filterText = new TextField();
 
 
     private Binder<Book> binder;
@@ -72,22 +70,11 @@ public class BookView extends Div {
         createGridLayout(splitLayout);
         createEditorLayout(splitLayout);
 
-        configureFilterTex();
-
-        add(filterText, splitLayout);
+        add(splitLayout);
     }
 
-    private void configureFilterTex() {
-        filterText.setPlaceholder("Filter by name..");
-        filterText.setClearButtonVisible(true);
-        filterText.setValueChangeMode(ValueChangeMode.LAZY);
-        filterText.addValueChangeListener(e -> updateList());
 
-    }
 
-    private void updateList() {
-        grid.setItems(bookService.findAllThatContains(filterText.getValue()));
-    }
 
 
     private void configCancelButton() {
@@ -134,7 +121,7 @@ public class BookView extends Div {
         grid = new Grid<>(Book.class);
         grid.setColumns("title", "author");
         grid.getColumns().forEach(column -> column.setAutoWidth(true));
-        grid.setItems(bookService.findAllThatContains());
+        grid.setItems( bookService.findAll());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
     }
@@ -148,7 +135,7 @@ public class BookView extends Div {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        AbstractField[] fields = new AbstractField[]{title, author};
+        AbstractField[] fields = new AbstractField[] { title, author};
         for (AbstractField field : fields) {
             ((HasStyle) field).addClassName("full-width");
         }
@@ -181,8 +168,6 @@ public class BookView extends Div {
     private void refreshGrid() {
         grid.select(null);
         grid.getDataProvider().refreshAll();
-
-
     }
 
     private void clearForm() {
