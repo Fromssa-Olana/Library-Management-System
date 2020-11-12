@@ -6,10 +6,12 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
-    private Integer id;
+
 
     @Id
     @GeneratedValue
+    private Integer id;
+
     public Integer getId() {
         return id;
     }

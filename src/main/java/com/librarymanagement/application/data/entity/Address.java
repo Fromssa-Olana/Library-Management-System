@@ -3,7 +3,7 @@ package com.librarymanagement.application.data.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "address")
+@Table()
 public class Address extends AbstractEntity {
     private String address;
 
@@ -13,7 +13,16 @@ public class Address extends AbstractEntity {
 
     private String zipCode;
 
+    @OneToOne
+    private Member member;
 
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     public String getAddress() {
         return address;

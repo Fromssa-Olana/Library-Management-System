@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "book")
+@Table()
 public class Book extends  AbstractEntity{
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "author")
     private String author;
 
-    @Column(name = "due_date")
     private Calendar dueDate;
+
+    @ManyToOne
+    private Member member;
 
     public String getTitle() {
         return title;

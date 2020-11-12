@@ -3,35 +3,33 @@ package com.librarymanagement.application.data.entity;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "member")
+@Table()
 public class Member extends AbstractEntity {
 
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "email")
     private String email;
-    @Column(name = "phone")
     private String phone;
-    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-    @Column(name = "occupation")
     private String occupation;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Address address;
-//  //  @JoinColumn(name = "address_id") // from the table
 
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Book> borrowedBooks = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -94,7 +94,7 @@ public class memberView extends Div {
                 if (this.member == null) {
                     this.member = new Member();
                     address.setAddress("1234 Burns Ave ");
-                   // member.setAddress(this.address);
+                    member.setAddress(this.address);
                 }
                 binder.writeBean(this.member);
                 memberService.save(this.member);
