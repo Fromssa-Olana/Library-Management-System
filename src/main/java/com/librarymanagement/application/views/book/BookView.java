@@ -4,6 +4,7 @@ import com.librarymanagement.application.backend.entity.Book;
 import com.librarymanagement.application.backend.service.BookService;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -17,6 +18,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.librarymanagement.application.views.main.MainView;
@@ -34,6 +36,11 @@ public class BookView extends Div {
     // Text fields
     private TextField title = new TextField("Title");
     private TextField author = new TextField("Author");
+
+    // filter and add book button
+    private TextField filterField = new TextField();
+    private Button addMemberButton = new Button("Add Book");
+
 
     // Buttons
     private Button cancel = new Button("Cancel");
@@ -64,17 +71,49 @@ public class BookView extends Div {
 
         configSaveButton(bookService);
 
+        configAddMemberButton();
+
+        configFilterField();
+
+
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
         createGridLayout(splitLayout);
         createEditorLayout(splitLayout);
 
-        add(splitLayout);
+        add(new HorizontalLayout(filterField,addMemberButton), splitLayout);
     }
 
 
 
+    /**
+     * It configures the filter text field behavior
+     */
+    private void configFilterField() {
+        filterField.setPlaceholder("Filter by name...");
+        filterField.setClearButtonVisible(true);
+        filterField.setValueChangeMode(ValueChangeMode.LAZY);
+        filterField.addValueChangeListener(event -> updateList());
+    }
+
+    /**
+     * It will update the grid according to the filter need
+     */
+    private void updateList() {
+        grid.setItems(bookService.findAll(filterField.getValue()));
+
+    }
+
+    private void configAddMemberButton() {
+        addMemberButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        addMemberButton.addClickShortcut(Key.ENTER);
+
+        //TODO implement this
+        // addMemberButton.addClickListener();
+
+
+    }
 
 
     private void configCancelButton() {

@@ -17,7 +17,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> findAllThatContains() {
+    public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
@@ -48,13 +48,13 @@ public class BookService {
      * @return
      *          filtered list of books
      */
-    public List<Book> findAllThatContains(String value) {
+    public List<Book> findAll(String value) {
 
         List<Book> filtered;
         if (value == null || value.isEmpty()) {
-            return findAllThatContains();
+            return findAll();
         } else {
-            filtered = findAllThatContains().stream()
+            filtered = findAll().stream()
                     .filter(e -> e.getAuthor().toLowerCase().contains(value.toLowerCase())
                             || e.getTitle().toLowerCase().contains(value.toLowerCase()))
                     .collect(Collectors.toList());

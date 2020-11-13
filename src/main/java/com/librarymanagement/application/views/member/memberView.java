@@ -7,6 +7,7 @@ import com.librarymanagement.application.backend.entity.Member;
 import com.librarymanagement.application.backend.service.MemberService;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -21,6 +22,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -42,6 +44,10 @@ public class memberView extends Div {
     private TextField phone = new TextField("Phone");
     private DatePicker dateOfBirth = new DatePicker("Date of birth");
     private TextField occupation = new TextField("Occupation");
+
+    // filter and add member button
+    private TextField filterField = new TextField();
+    private Button addMemberButton = new Button("Add Member");
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -72,19 +78,53 @@ public class memberView extends Div {
 
         configSaveButton(memberService);
 
+        configAddMemberButton();
+
+        configFilterField();
+
+
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
+
 
         createGridLayout(splitLayout);
         createEditorLayout(splitLayout);
 
-        add(splitLayout);
+        add(new HorizontalLayout(filterField, addMemberButton), splitLayout);
+    }
+
+    /**
+     * It configures the filter text field behavior
+     */
+    private void configFilterField() {
+        filterField.setPlaceholder("Filter by name...");
+        filterField.setClearButtonVisible(true);
+        filterField.setValueChangeMode(ValueChangeMode.LAZY);
+        filterField.addValueChangeListener(event -> updateList());
+    }
+
+    /**
+     * It will update the grid according to the filter need
+     */
+    private void updateList() {
+        grid.setItems(memberService.findAll(filterField.getValue()));
+
+    }
+
+    private void configAddMemberButton() {
+        addMemberButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        addMemberButton.addClickShortcut(Key.ENTER);
+
+        //TODO implement this
+        // addMemberButton.addClickListener();
+
+
     }
 
     private void configCancelButton() {
         cancel.addClickListener(e -> {
             clearForm();
-            refreshGrid();
+            updateList();
         });
     }
 
@@ -93,13 +133,11 @@ public class memberView extends Div {
             try {
                 if (this.member == null) {
                     this.member = new Member();
-                    address.setAddress("1234 Burns Ave ");
-                    member.setAddress(this.address);
                 }
                 binder.writeBean(this.member);
                 memberService.save(this.member);
                 clearForm();
-                refreshGrid();
+                updateList();
                 Notification.show("Member details stored.");
             } catch (ValidationException validationException) {
                 Notification.show("An exception happened while trying to store the member details.");
@@ -115,7 +153,7 @@ public class memberView extends Div {
                 if (personFromBackend.isPresent()) {
                     populateForm(personFromBackend.get());
                 } else {
-                    refreshGrid();
+                    updateList();
                 }
             } else {
                 clearForm();
@@ -141,7 +179,7 @@ public class memberView extends Div {
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
-        AbstractField[] fields = new AbstractField[] { firstName, lastName, email, phone, dateOfBirth, occupation };
+        AbstractField[] fields = new AbstractField[]{firstName, lastName, email, phone, dateOfBirth, occupation};
         for (AbstractField field : fields) {
             ((HasStyle) field).addClassName("full-width");
         }
@@ -169,11 +207,6 @@ public class memberView extends Div {
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
         wrapper.add(grid);
-    }
-
-    private void refreshGrid() {
-        grid.select(null);
-        grid.getDataProvider().refreshAll();
     }
 
     private void clearForm() {
