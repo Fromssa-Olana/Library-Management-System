@@ -1,6 +1,6 @@
 package com.librarymanagement.application.views.member;
-import com.librarymanagement.application.backend.entity.Address;
-import com.librarymanagement.application.backend.entity.Member;
+import com.librarymanagement.application.backend.dto.Address;
+import com.librarymanagement.application.backend.dto.Member;
 import com.librarymanagement.application.backend.service.AddressService;
 import com.librarymanagement.application.backend.service.MemberService;
 import com.librarymanagement.application.views.main.MainView;

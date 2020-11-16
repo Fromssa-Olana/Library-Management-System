@@ -1,15 +1,12 @@
 package com.librarymanagement.application.backend.service;
 
 import com.librarymanagement.application.backend.Repository.AddressRepository;
-import com.librarymanagement.application.backend.Repository.MemberRepository;
-import com.librarymanagement.application.backend.entity.Address;
-import com.librarymanagement.application.backend.entity.Member;
+import com.librarymanagement.application.backend.dto.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AddressService {

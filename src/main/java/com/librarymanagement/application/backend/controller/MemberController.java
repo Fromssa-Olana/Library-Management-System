@@ -1,5 +1,5 @@
 package com.librarymanagement.application.backend.controller;
-import com.librarymanagement.application.backend.entity.Member;
+import com.librarymanagement.application.backend.dto.Member;
 import com.librarymanagement.application.backend.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.librarymanagement.application.backend.entity;
+package com.librarymanagement.application.backend.dto;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

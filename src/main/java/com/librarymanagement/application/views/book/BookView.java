@@ -1,6 +1,6 @@
 package com.librarymanagement.application.views.book;
 
-import com.librarymanagement.application.backend.entity.Book;
+import com.librarymanagement.application.backend.dto.Book;
 import com.librarymanagement.application.backend.service.BookService;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasStyle;
