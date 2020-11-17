@@ -1,4 +1,4 @@
-package com.librarymanagement.application.backend.entity;
+package com.librarymanagement.application.backend.dto;
 
 import javax.persistence.*;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table()
 public class Address extends AbstractEntity {
 
-    private String address;
+    private String houseNumber;
 
     private String city;
 
@@ -25,12 +25,12 @@ public class Address extends AbstractEntity {
         this.member = member;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHomeNumber() {
+        return houseNumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHomeNumber(String address) {
+        this.houseNumber = address;
     }
 
     public String getCity() {
@@ -60,7 +60,7 @@ public class Address extends AbstractEntity {
     @Override
     public String toString() {
         return "Address{" +
-                "address='" + address + '\'' +
+                "address='" + houseNumber + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipCode='" + zipCode + '\'' +

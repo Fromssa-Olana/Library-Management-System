@@ -1,7 +1,7 @@
 package com.librarymanagement.application.backend.service;
 
 import com.librarymanagement.application.backend.Repository.BookRepository;
-import com.librarymanagement.application.backend.entity.Book;
+import com.librarymanagement.application.backend.dto.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

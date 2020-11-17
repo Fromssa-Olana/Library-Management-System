@@ -1,4 +1,4 @@
-package com.librarymanagement.application.backend.entity;
+package com.librarymanagement.application.backend.dto;
 
 import javax.persistence.*;
 import java.util.Calendar;
