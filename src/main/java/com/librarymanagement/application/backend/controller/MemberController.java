@@ -9,12 +9,8 @@ import java.util.Optional;
 
 @RestController
 public class MemberController {
-    final MemberService memberService;
-
-    public MemberController(@Autowired MemberService memberService) {
-        this.memberService = memberService;
-    }
-
+   @Autowired
+   MemberService memberService;
 
     //creating a get mapping that retrieves all the members detail from the database
     @GetMapping("/members")
@@ -36,10 +32,10 @@ public class MemberController {
     }
     //creating post mapping that post the member detail in the database
     @PostMapping("/members")
-    private int saveMember(@RequestBody Member member)
+    private Member saveMember(@RequestBody Member member)
     {
         memberService.save(member);
-        return member.getId();
+        return member;
     }
     //creating put mapping that updates the member detail
     @PutMapping("/members")
