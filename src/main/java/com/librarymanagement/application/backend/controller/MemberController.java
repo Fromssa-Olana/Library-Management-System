@@ -14,13 +14,13 @@ public class MemberController {
 
     //creating a get mapping that retrieves all the members detail from the database
     @GetMapping("/members")
-    private List<Member> getAllBooks()
+    private List<Member> getAllMember()
     {
         return memberService.findAll();
     }
     //creating a get mapping that retrieves the detail of a specific member
     @GetMapping("/members/{memberId}")
-    private Optional <Member> getBooks(@PathVariable("memberId") int memberId)
+    private Optional <Member> getMember(@PathVariable("memberId") int memberId)
     {
         return memberService.get(memberId);
     }
