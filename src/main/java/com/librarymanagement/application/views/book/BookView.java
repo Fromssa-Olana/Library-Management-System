@@ -123,6 +123,7 @@ public class BookView extends Div {
         });
     }
 
+
     private void configSaveButton(BookService bookService) {
         save.addClickListener(e -> {
             try {
@@ -132,7 +133,7 @@ public class BookView extends Div {
                 binder.writeBean(this.book);
                 bookService.save(this.book);
                 clearForm();
-                refreshGrid();
+                updateList();
                 Notification.show("Member details stored.");
             } catch (ValidationException validationException) {
                 Notification.show("An exception happened while trying to store the member details.");
