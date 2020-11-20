@@ -17,6 +17,17 @@ public class Address extends AbstractEntity {
     @OneToOne
     private Member member;
 
+    public Address() {
+    }
+
+    public Address(String houseNumber, String city, String state, String zipCode, Member member) {
+        this.houseNumber = houseNumber;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.member = member;
+    }
+
     public Member getMember() {
         return member;
     }
