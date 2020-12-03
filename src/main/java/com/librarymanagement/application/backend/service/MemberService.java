@@ -43,12 +43,13 @@ public class MemberService {
     }
 
     /**
-     * Saves a member object
+     *
      * @param member
-     *             Member object
+     * @return
+     *          the saved member object
      */
-    public void save(Member member) {
-        memberRepository.save(member);
+    public Member save(Member member) {
+       return memberRepository.save(member);
     }
 
     /**

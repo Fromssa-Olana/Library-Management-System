@@ -16,6 +16,24 @@ public class Book extends  AbstractEntity{
     @ManyToOne
     private Member member;
 
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public Book() {
+    }
+
+    public Book(String title, String author, Calendar dueDate, Member member) {
+        this.title = title;
+        this.author = author;
+        this.dueDate = dueDate;
+        this.member = member;
+    }
+
     public String getTitle() {
         return title;
     }

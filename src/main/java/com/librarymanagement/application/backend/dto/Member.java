@@ -1,6 +1,8 @@
 package com.librarymanagement.application.backend.dto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,18 +12,33 @@ import java.util.List;
 @Table()
 public class Member extends AbstractEntity {
 
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
+    @Email
     private String email;
+    @NotNull
     private String phone;
     private LocalDate dateOfBirth;
     private String occupation;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Book> borrowedBooks = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
+
+    public Member() {
+    }
+
+    public Member(String firstName, String lastName, String email, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public Address getAddress() {
         return address;
